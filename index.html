@@ -7,32 +7,14 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cream: #FAF7F2;
-    --ink: #1C1917;
-    --muted: #78716C;
-    --accent: #D97706;
-    --accent-light: #FEF3C7;
-    --green: #059669;
-    --green-light: #D1FAE5;
-    --red: #DC2626;
-    --border: #E7E3DC;
-    --card: #FFFFFF;
-    --radius: 16px;
+    --cream: #FAF7F2; --ink: #1C1917; --muted: #78716C;
+    --accent: #D97706; --accent-light: #FEF3C7;
+    --green: #059669; --green-light: #D1FAE5;
+    --red: #DC2626; --border: #E7E3DC; --card: #FFFFFF; --radius: 16px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--cream);
-    color: var(--ink);
-    min-height: 100vh;
-    max-width: 480px;
-    margin: 0 auto;
-    padding: 0 0 120px;
-  }
-  header {
-    padding: 2rem 1.5rem 1rem;
-    display: flex; align-items: flex-end; justify-content: space-between;
-  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); min-height: 100vh; max-width: 480px; margin: 0 auto; padding: 0 0 120px; }
+  header { padding: 2rem 1.5rem 1rem; display: flex; align-items: flex-end; justify-content: space-between; }
   header h1 { font-family: 'DM Serif Display', serif; font-size: 2rem; font-weight: 400; line-height: 1.1; }
   header h1 span { color: var(--accent); }
   .section { padding: 0 1.5rem; margin-bottom: 1.5rem; }
@@ -43,44 +25,22 @@
   .field-icon { font-size: 18px; flex-shrink: 0; }
   .field-body { flex: 1; min-width: 0; }
   .field-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 2px; }
-  .field input {
-    width: 100%; border: none; background: transparent;
-    font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--ink); outline: none; padding: 0;
-  }
+  .field input { width: 100%; border: none; background: transparent; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--ink); outline: none; padding: 0; }
   .field input::placeholder { color: #C4B5A5; }
-  .status-dot {
-    width: 8px; height: 8px; border-radius: 50%; background: #C4B5A5; flex-shrink: 0; transition: background 0.3s;
-  }
+  .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #C4B5A5; flex-shrink: 0; transition: background 0.3s; }
   .status-dot.ok { background: var(--green); }
-  .capture-area {
-    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
-    overflow: hidden; min-height: 220px; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; cursor: pointer; position: relative; transition: background 0.2s;
-  }
+  .capture-area { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; position: relative; transition: background 0.2s; }
   .capture-area:active { background: #F5F0E8; }
   #preview-img { width: 100%; max-height: 300px; object-fit: cover; display: none; }
   .capture-placeholder { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 2.5rem; text-align: center; }
   .camera-icon { width: 64px; height: 64px; background: var(--accent-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; }
   .capture-placeholder p { font-size: 15px; font-weight: 500; }
   .capture-placeholder span { font-size: 13px; color: var(--muted); }
-  .capture-overlay {
-    position: absolute; bottom: 0; left: 0; right: 0; padding: 10px 1rem;
-    background: linear-gradient(transparent, rgba(0,0,0,0.5));
-    display: none; justify-content: space-between; align-items: center;
-  }
+  .capture-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 10px 1rem; background: linear-gradient(transparent, rgba(0,0,0,0.5)); display: none; justify-content: space-between; align-items: center; }
   .capture-overlay.visible { display: flex; }
-  .overlay-btn {
-    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; color: white;
-    background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4);
-    border-radius: 20px; padding: 6px 14px; cursor: pointer;
-  }
+  .overlay-btn { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; color: white; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); border-radius: 20px; padding: 6px 14px; cursor: pointer; }
   #file-input { display: none; }
-  .scan-btn {
-    display: block; background: var(--ink); color: white;
-    font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600;
-    border: none; border-radius: var(--radius); padding: 18px; cursor: pointer;
-    transition: opacity 0.2s, transform 0.1s; margin: 0 1.5rem; width: calc(100% - 3rem);
-  }
+  .scan-btn { display: block; background: var(--ink); color: white; font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600; border: none; border-radius: var(--radius); padding: 18px; cursor: pointer; transition: opacity 0.2s, transform 0.1s; margin: 0 1.5rem; width: calc(100% - 3rem); }
   .scan-btn:active { transform: scale(0.98); }
   .scan-btn:disabled { opacity: 0.4; cursor: default; }
   .scan-btn.loading { background: var(--muted); pointer-events: none; }
@@ -88,29 +48,13 @@
   .result-field { padding: 12px 1.25rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
   .result-field:last-child { border-bottom: none; }
   .rf-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); min-width: 80px; }
-  .rf-input {
-    flex: 1; border: none; background: transparent;
-    font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; color: var(--ink); outline: none; padding: 0;
-  }
+  .rf-input { flex: 1; border: none; background: transparent; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; color: var(--ink); outline: none; padding: 0; }
   .rf-input.amount { color: var(--accent); font-size: 17px; }
   select.rf-input { appearance: none; cursor: pointer; }
-  .submit-btn {
-    display: block; width: calc(100% - 3rem); margin: 1rem 1.5rem;
-    background: var(--green); color: white;
-    font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600;
-    border: none; border-radius: var(--radius); padding: 18px; cursor: pointer;
-    transition: opacity 0.2s, transform 0.1s;
-  }
+  .submit-btn { display: block; width: calc(100% - 3rem); margin: 1rem 1.5rem; background: var(--green); color: white; font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600; border: none; border-radius: var(--radius); padding: 18px; cursor: pointer; transition: opacity 0.2s, transform 0.1s; }
   .submit-btn:active { transform: scale(0.98); opacity: 0.9; }
   .submit-btn:disabled { opacity: 0.4; cursor: default; }
-  #toast {
-    position: fixed; bottom: 24px; left: 50%;
-    transform: translateX(-50%) translateY(80px);
-    background: var(--ink); color: white; font-size: 14px; font-weight: 500;
-    padding: 12px 20px; border-radius: 30px;
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    white-space: nowrap; z-index: 999; max-width: calc(100% - 3rem); text-align: center;
-  }
+  #toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--ink); color: white; font-size: 14px; font-weight: 500; padding: 12px 20px; border-radius: 30px; transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); white-space: nowrap; z-index: 999; max-width: calc(100% - 3rem); text-align: center; }
   #toast.visible { transform: translateX(-50%) translateY(0); }
   #toast.success { background: var(--green); }
   #toast.error { background: var(--red); }
@@ -124,19 +68,17 @@
   .empty-history { padding: 2rem; text-align: center; color: var(--muted); font-size: 14px; }
   .spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 8px; }
   @keyframes spin { to { transform: rotate(360deg); } }
-  .note { font-size: 12px; color: var(--muted); margin-top: 8px; padding: 0 4px; }
+  .test-btn { display: block; width: calc(100% - 3rem); margin: 0 1.5rem 1.5rem; background: transparent; color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; border: 1px dashed var(--border); border-radius: var(--radius); padding: 12px; cursor: pointer; }
+  .test-btn:active { background: var(--accent-light); }
 </style>
 </head>
 <body>
 
 <header>
   <h1>Receipt<br><span>Scanner</span></h1>
-  <div style="text-align:right; font-size:12px; color:var(--muted); line-height:1.6;">
-    Powered by<br><strong style="color:var(--ink)">Claude AI</strong>
-  </div>
+  <div style="text-align:right; font-size:12px; color:var(--muted); line-height:1.6;">Powered by<br><strong style="color:var(--ink)">Claude AI</strong></div>
 </header>
 
-<!-- CONFIG -->
 <div class="section">
   <div class="section-label">Configuration</div>
   <div class="card">
@@ -157,10 +99,11 @@
       <div class="status-dot" id="dot-script"></div>
     </div>
   </div>
-  <p class="note">Saved on this device only. Never shared.</p>
+  <p style="font-size:12px; color:var(--muted); margin-top:8px; padding:0 4px;">Saved on this device only. Never shared.</p>
 </div>
 
-<!-- CAPTURE -->
+<button class="test-btn" onclick="testConnection()">🔌 Test Google Sheet connection</button>
+
 <div class="section">
   <div class="section-label">Receipt Photo</div>
   <div class="capture-area" id="capture-area" onclick="triggerCamera()">
@@ -178,11 +121,8 @@
   <input type="file" id="file-input" accept="image/*" capture="environment" onchange="handleFile(this)">
 </div>
 
-<button class="scan-btn" id="scan-btn" onclick="scanReceipt()" disabled>
-  Scan Receipt
-</button>
+<button class="scan-btn" id="scan-btn" onclick="scanReceipt()" disabled>Scan Receipt</button>
 
-<!-- RESULT -->
 <div id="result-section">
   <div class="section" style="margin-top:1.5rem;">
     <div class="section-label">Extracted Data — Edit if needed</div>
@@ -215,13 +155,9 @@
       </div>
     </div>
   </div>
-
-  <button class="submit-btn" id="submit-btn" onclick="addToSheet()">
-    Add to Google Sheet ✓
-  </button>
+  <button class="submit-btn" id="submit-btn" onclick="addToSheet()">Add to Google Sheet ✓</button>
 </div>
 
-<!-- HISTORY -->
 <div class="section">
   <div class="section-label">Recent — this session</div>
   <div class="card" id="history-list">
@@ -241,19 +177,13 @@ window.addEventListener('load', () => {
   document.getElementById('r-date').value = new Date().toISOString().split('T')[0];
 });
 
-function updateDot(id, on) {
-  document.getElementById(id).classList.toggle('ok', on);
-}
+function updateDot(id, on) { document.getElementById(id).classList.toggle('ok', on); }
 
 document.getElementById('anthropic-key').addEventListener('input', function() {
-  const val = this.value.trim();
-  updateDot('dot-anthropic', val.length > 10);
-  saveConfig();
+  updateDot('dot-anthropic', this.value.trim().length > 10); saveConfig();
 });
 document.getElementById('script-url').addEventListener('input', function() {
-  const val = this.value.trim();
-  updateDot('dot-script', val.startsWith('https://script.google.com'));
-  saveConfig();
+  updateDot('dot-script', this.value.trim().startsWith('https://script.google.com')); saveConfig();
 });
 
 function saveConfig() {
@@ -263,8 +193,32 @@ function saveConfig() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
 }
 
-let currentImageBase64 = null;
+// Test connection by sending a test row
+async function testConnection() {
+  const scriptUrl = document.getElementById('script-url').value.trim();
+  if (!scriptUrl) { showToast('Enter your Apps Script URL first', 'error'); return; }
+  showToast('Testing connection…');
+  try {
+    await fetch(scriptUrl, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        store: 'TEST - Connection Check',
+        date: new Date().toISOString().split('T')[0],
+        total: 0.00,
+        category: 'Other',
+        notes: 'Delete this row — just a test',
+        scannedAt: new Date().toISOString()
+      })
+    });
+    showToast('Request sent! Check your Google Sheet for a TEST row.', 'success');
+  } catch(err) {
+    showToast('Connection failed: ' + err.message, 'error');
+  }
+}
 
+let currentImageBase64 = null;
 function triggerCamera() { document.getElementById('file-input').click(); }
 
 function handleFile(input) {
@@ -344,7 +298,7 @@ async function scanReceipt() {
           role: 'user',
           content: [
             { type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: currentImageBase64 } },
-            { type: 'text', text: `Analyze this receipt and extract data. Return ONLY valid JSON, no markdown or explanation:
+            { type: 'text', text: `Analyze this receipt and extract data. Return ONLY valid JSON, no markdown:
 {"store":"store name","date":"YYYY-MM-DD","total":0.00,"category":"one of: Groceries, Dining, Gas, Shopping, Other","notes":"brief notes or empty string"}
 Today is ${new Date().toISOString().split('T')[0]}. Use empty string or 0 if a field cannot be determined.` }
           ]
@@ -363,8 +317,7 @@ Today is ${new Date().toISOString().split('T')[0]}. Use empty string or 0 if a f
     document.getElementById('r-total').value = parsed.total || '';
     document.getElementById('r-notes').value = parsed.notes || '';
     const cat = document.getElementById('r-category');
-    const opts = Array.from(cat.options).map(o => o.value);
-    if (opts.includes(parsed.category)) cat.value = parsed.category;
+    if (Array.from(cat.options).map(o => o.value).includes(parsed.category)) cat.value = parsed.category;
 
     document.getElementById('result-section').style.display = 'block';
     document.getElementById('result-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -402,7 +355,6 @@ async function addToSheet() {
       body: JSON.stringify({ store, date, total, category, notes, scannedAt: new Date().toISOString() })
     });
 
-    // no-cors means we can't read the response, but if no exception was thrown it went through
     addToHistory({ store, date, total, category });
     showToast('Added to Google Sheet! ✓', 'success');
     retakePhoto();
@@ -436,8 +388,8 @@ function addToHistory(item) {
 function showToast(msg, type = '') {
   const t = document.getElementById('toast');
   t.textContent = msg;
-  t.className = 'visible ' + type;
-  setTimeout(() => { t.className = type; }, 3500);
+  t.className = 'visible ' + (type || '');
+  setTimeout(() => { t.className = type || ''; }, 3500);
 }
 </script>
 </body>
