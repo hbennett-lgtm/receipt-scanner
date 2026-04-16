@@ -193,35 +193,28 @@ function saveConfig() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
 }
 
-// Send data to Google Sheet via GET request (avoids CORS issues)
+// Use no-cors with GET params — avoids CORS preflight entirely
 async function sendToSheet(params) {
   const scriptUrl = document.getElementById('script-url').value.trim();
-  if (!scriptUrl) return false;
   const url = scriptUrl + '?' + new URLSearchParams(params).toString();
-  const response = await fetch(url, { method: 'GET', mode: 'cors' });
-  const data = await response.json();
-  return data.success !== false;
+  // no-cors: browser won't read the response but the request goes through
+  await fetch(url, { method: 'GET', mode: 'no-cors' });
+  return true;
 }
 
 async function testConnection() {
   const scriptUrl = document.getElementById('script-url').value.trim();
   if (!scriptUrl) { showToast('Enter your Apps Script URL first', 'error'); return; }
-  showToast('Testing connection…');
+  showToast('Sending test row…');
   try {
-    const url = scriptUrl + '?' + new URLSearchParams({
+    await sendToSheet({
       store: 'TEST - Connection Check',
       date: new Date().toISOString().split('T')[0],
       total: '0',
       category: 'Other',
-      notes: 'Delete this row'
-    }).toString();
-    const response = await fetch(url, { method: 'GET', mode: 'cors' });
-    const data = await response.json();
-    if (data.success || data.status === 'ok') {
-      showToast('Connected! Check your Sheet for TEST row ✓', 'success');
-    } else {
-      showToast('Script error: ' + (data.error || 'unknown'), 'error');
-    }
+      notes: 'Delete this test row'
+    });
+    showToast('Sent! Check your Google Sheet now ✓', 'success');
   } catch(err) {
     showToast('Failed: ' + err.message, 'error');
   }
@@ -357,19 +350,12 @@ async function addToSheet() {
   btn.disabled = true;
 
   try {
-    const url = scriptUrl + '?' + new URLSearchParams({ store, date, total, category, notes }).toString();
-    const response = await fetch(url, { method: 'GET', mode: 'cors' });
-    const data = await response.json();
-
-    if (data.success) {
-      addToHistory({ store, date, total, category });
-      showToast('Added to Google Sheet! ✓', 'success');
-      retakePhoto();
-      document.getElementById('result-section').style.display = 'none';
-      document.getElementById('r-notes').value = '';
-    } else {
-      showToast('Sheet error: ' + (data.error || 'unknown'), 'error');
-    }
+    await sendToSheet({ store, date, total, category, notes });
+    addToHistory({ store, date, total, category });
+    showToast('Added to Google Sheet! ✓', 'success');
+    retakePhoto();
+    document.getElementById('result-section').style.display = 'none';
+    document.getElementById('r-notes').value = '';
   } catch (err) {
     showToast('Error: ' + err.message, 'error');
   } finally {
